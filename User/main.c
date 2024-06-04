@@ -12,11 +12,7 @@ int main(void)
 	OLED_Init();
 	while(1)
 	{
-			OLED_ShowNum(1,1,1,1);
-	OLED_ShowNum(1,1,1,1);
-	OLED_ShowNum(2,1,1,1);
-	OLED_ShowNum(3,1,1,1);
-	OLED_ShowNum(4,1,1,1);
+		
 
 	}
 
