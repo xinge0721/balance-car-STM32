@@ -1,6 +1,15 @@
 #include "stm32f10x.h"                  // Device header
+#include "motor.h"
 #include "PWM.h"
+#define Ain1 PBout(14)
+#define Ain2 PBout(15)
 
+#define Bin1 PBout(13)
+#define Bin2 PBout(12)
+
+
+#define Motor_MAX 7200
+#define	Motor_MIN 0
 /**
   * 函    数：直流电机初始化
   * 参    数：无
@@ -20,41 +29,31 @@ void Motor_Init(void)
 	PWM_Init();													//初始化直流电机的底层PWM
 }
 
-
-
-/**
-  * 函    数：直流电机设置速度
-  * 参    数：Speed 要设置的速度，范围：-100~100
-  * 返 回 值：无
-  */
-void Motor2_SetSpeed(int8_t Speed)
+void Motor_section(int* Ain,int* Bin)
 {
-	if (Speed >= 0)							//如果设置正转的速度值
-	{
-		GPIO_SetBits(GPIOA, GPIO_Pin_12);	//PA4置高电平
-		GPIO_ResetBits(GPIOA, GPIO_Pin_13);	//PA5置低电平，设置方向为正转
-		PWM_SetCompare2(Speed);				//PWM设置为速度值
-	}
-	else									//否则，即设置反转的速度值
-	{
-		GPIO_ResetBits(GPIOA, GPIO_Pin_12);	//PA4置低电平
-		GPIO_SetBits(GPIOA, GPIO_Pin_13);	//PA5置高电平，设置方向为反转
-		PWM_SetCompare2(-Speed);			//PWM设置为负的速度值，因为此时速度值为负数，而PWM只能给正数
-	}
+	if(*Ain > Motor_MAX)      *Ain = Motor_MAX;
+	else if(*Ain < Motor_MIN) *Ain = Motor_MIN;
+	
+	if(*Bin > Motor_MAX)      *Bin = Motor_MAX;
+	else if(*Bin < Motor_MIN) *Bin = Motor_MIN;
 }
 
-void Motor1_SetSpeed(int8_t Speed)
+int Motor_abs(int moto)
 {
-	if (Speed >= 0)							//如果设置正转的速度值
-	{
-		GPIO_SetBits(GPIOA, GPIO_Pin_14);	//PA4置高电平
-		GPIO_ResetBits(GPIOA, GPIO_Pin_15);	//PA5置低电平，设置方向为正转
-		PWM_SetCompare4(Speed);				//PWM设置为速度值
-	}
-	else									//否则，即设置反转的速度值
-	{
-		GPIO_ResetBits(GPIOA, GPIO_Pin_14);	//PA4置低电平
-		GPIO_SetBits(GPIOA, GPIO_Pin_15);	//PA5置高电平，设置方向为反转
-		PWM_SetCompare4(-Speed);			//PWM设置为负的速度值，因为此时速度值为负数，而PWM只能给正数
-	}
+	return moto > 0 ? moto: -moto;
 }
+
+void Motor_Speed(int motoA,int motoB)
+{
+	if(motoA > 0)     Ain1=1,Ain2=0;
+	else if(motoA < 0)Ain1=0,Ain2=1;
+	else 			  Ain1=0,Ain2=0;
+	TIM_SetCompare1(TIM1,Motor_abs(motoA));
+	
+	if(motoB > 0)	  Bin1=1,Bin2=0;
+	else if(motoB < 0)Bin1=0,Bin2=1;
+	else 			  Bin1=0,Bin2=0;
+	TIM_SetCompare4(TIM1,Motor_abs(motoB));
+}
+
+

@@ -28,15 +28,18 @@
 ".\objects\delay.o"
 ".\objects\timer.o"
 ".\objects\exti.o"
+".\objects\sys.o"
 ".\objects\pwm.o"
 ".\objects\motor.o"
 ".\objects\encoder.o"
 ".\objects\pid.o"
 ".\objects\mpu6050.o"
-".\objects\myi2c.o"
+".\objects\mpuiic.o"
+".\objects\inv_mpu.o"
+".\objects\inv_mpu_dmp_motion_driver.o"
 ".\objects\main.o"
 ".\objects\stm32f10x_it.o"
---strict --scatter ".\Objects\Project.sct"
+--library_type=microlib --strict --scatter ".\Objects\Project.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers
 --list ".\Listings\Project.map" -o .\Objects\Project.axf

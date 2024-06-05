@@ -29,3 +29,4 @@
 .\objects\pid.o: .\Library\stm32f10x_wwdg.h
 .\objects\pid.o: .\Library\misc.h
 .\objects\pid.o: .\System\Delay.h
+.\objects\pid.o: .\System\sys.h

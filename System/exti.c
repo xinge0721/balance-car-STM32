@@ -6,7 +6,7 @@ void MPE_EXTI_Init(void)
 
 	/*GPIO初始化*/
 	GPIO_InitTypeDef GPIO_InitStructure;
-	GPIO_InitStructure.GPIO_Mode  = GPIO_Mode_AF_PP;
+	GPIO_InitStructure.GPIO_Mode  = GPIO_Mode_IPU;
 	GPIO_InitStructure.GPIO_Pin   = GPIO_Pin_5;
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
 	GPIO_Init(GPIOB, &GPIO_InitStructure);								
@@ -26,3 +26,6 @@ void MPE_EXTI_Init(void)
 	
 }	
 	
+
+
+

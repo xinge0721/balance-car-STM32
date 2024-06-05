@@ -46,8 +46,8 @@ void PWM_Init(u16 Psc,u16 per)
 	TIM_CtrlPWMOutputs(TIM1,ENABLE);//高级定时器专属——MOE主输出使能
 	
 
-	TIM_OC1PreloadConfig(TIM1, ENABLE);//OC1预装载寄存器使能
-	TIM_OC4PreloadConfig(TIM1, ENABLE);//OC4预装载寄存器使能
+	TIM_OC1PreloadConfig(TIM1, TIM_OCPreload_Enable);//OC1预装载寄存器使能
+	TIM_OC4PreloadConfig(TIM1, TIM_OCPreload_Enable);//OC4预装载寄存器使能
 
     TIM_ARRPreloadConfig(TIM1, ENABLE);//TIM1在ARR上预载寄存器使能
 	

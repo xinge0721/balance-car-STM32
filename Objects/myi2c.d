@@ -1,4 +1,6 @@
 .\objects\myi2c.o: Hardware\MYI2C.c
+.\objects\myi2c.o: Hardware\MYI2C.h
+.\objects\myi2c.o: .\System\sys.h
 .\objects\myi2c.o: .\Start\stm32f10x.h
 .\objects\myi2c.o: .\Start\core_cm3.h
 .\objects\myi2c.o: E:\Keil_v5\UV4\ARM\ARMCC\Bin\..\include\stdint.h
@@ -28,5 +30,4 @@
 .\objects\myi2c.o: .\Library\stm32f10x_usart.h
 .\objects\myi2c.o: .\Library\stm32f10x_wwdg.h
 .\objects\myi2c.o: .\Library\misc.h
-.\objects\myi2c.o: .\System\Delay.h
-.\objects\myi2c.o: Hardware\MPU6050.h
+.\objects\myi2c.o: .\System\delay.h
