@@ -21,14 +21,6 @@ void Encoder_Init_1(void)
 	
 	TIM_TimeBaseInit(TIM2,&TIM_TimeBaseInitStruct);
 	
-	/*NVIC配置*/
-	NVIC_InitTypeDef NVIC_InitStructure;									//定义结构体变量
-	NVIC_InitStructure.NVIC_IRQChannel = TIM2_IRQn;				//选择配置NVIC的TIM2线
-	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;			//指定NVIC线路使能
-	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 2;	//指定NVIC线路的抢占优先级为2
-	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1;				//指定NVIC线路的响应优先级为1
-	NVIC_Init(&NVIC_InitStructure);												//将结构体变量交给NVIC_Init，配置NVIC外设
-	
 	TIM_ICInitTypeDef TIM_ICInitStructure;
 	
 	TIM_EncoderInterfaceConfig(TIM2, TIM_EncoderMode_TI12, TIM_ICPolarity_Rising, TIM_ICPolarity_Rising);			//配置编码器模式
@@ -63,15 +55,7 @@ void Encoder_Init_2(void)
 	TIM_TimeBaseInitStruct.TIM_Prescaler 	     = 0;
 	TIM_TimeBaseInitStruct.TIM_RepetitionCounter = 0;
 	
-	/*NVIC配置*/
-	NVIC_InitTypeDef NVIC_InitStructure;									//定义结构体变量
-	NVIC_InitStructure.NVIC_IRQChannel = TIM4_IRQn;				//选择配置NVIC的TIM4线
-	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;			//指定NVIC线路使能
-	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 2;	//指定NVIC线路的抢占优先级为2
-	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1;				//指定NVIC线路的响应优先级为1
-	NVIC_Init(&NVIC_InitStructure);												//将结构体变量交给NVIC_Init，配置NVIC外设
-	
-	
+
 	TIM_TimeBaseInit(TIM4,&TIM_TimeBaseInitStruct);
 	
 	
