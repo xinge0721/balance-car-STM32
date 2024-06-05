@@ -1,11 +1,14 @@
-#ifndef __Encoder_H
-#define __Encoder_H
+#ifndef  _ENCODER_H
+#define  _ENCODER_H
 
-void Encoder_Init_1(void);
-void Encoder_Init_2(void);
+#include "sys.h" 
 
-int16_t Encoder_Get(uint8_t x);
+
+
 
 void TIM2_IRQHandler(void);
 void TIM4_IRQHandler(void);
+int Read_Speed(int TIMx);
+void Encoder_TIM2_Init(void);
+void Encoder_TIM4_Init(void);
 #endif

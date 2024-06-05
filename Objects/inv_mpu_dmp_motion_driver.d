@@ -39,3 +39,13 @@
 .\objects\inv_mpu_dmp_motion_driver.o: .\System\usart.h
 .\objects\inv_mpu_dmp_motion_driver.o: .\System\sys.h
 .\objects\inv_mpu_dmp_motion_driver.o: .\System\delay.h
+.\objects\inv_mpu_dmp_motion_driver.o: .\System\sys.h
+.\objects\inv_mpu_dmp_motion_driver.o: .\System\usart.h
+.\objects\inv_mpu_dmp_motion_driver.o: .\Hardware\mpu6050.h
+.\objects\inv_mpu_dmp_motion_driver.o: .\Hardware\MYI2C.h
+.\objects\inv_mpu_dmp_motion_driver.o: .\Hardware\oled.h
+.\objects\inv_mpu_dmp_motion_driver.o: .\Hardware\PID.h
+.\objects\inv_mpu_dmp_motion_driver.o: .\Hardware\encoder.h
+.\objects\inv_mpu_dmp_motion_driver.o: .\System\exti.h
+.\objects\inv_mpu_dmp_motion_driver.o: .\Hardware\motor.h
+.\objects\inv_mpu_dmp_motion_driver.o: .\Hardware\pwm.h

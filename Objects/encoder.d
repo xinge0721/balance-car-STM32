@@ -1,4 +1,6 @@
 .\objects\encoder.o: Hardware\Encoder.c
+.\objects\encoder.o: Hardware\Encoder.h
+.\objects\encoder.o: .\System\sys.h
 .\objects\encoder.o: .\Start\stm32f10x.h
 .\objects\encoder.o: .\Start\core_cm3.h
 .\objects\encoder.o: E:\Keil_v5\UV4\ARM\ARMCC\Bin\..\include\stdint.h
@@ -28,3 +30,20 @@
 .\objects\encoder.o: .\Library\stm32f10x_usart.h
 .\objects\encoder.o: .\Library\stm32f10x_wwdg.h
 .\objects\encoder.o: .\Library\misc.h
+.\objects\encoder.o: .\System\delay.h
+.\objects\encoder.o: .\System\sys.h
+.\objects\encoder.o: .\System\usart.h
+.\objects\encoder.o: E:\Keil_v5\UV4\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\encoder.o: .\Hardware\MPU6050\eMPL\inv_mpu.h
+.\objects\encoder.o: .\Hardware\MPU6050\eMPL\inv_mpu_dmp_motion_driver.h
+.\objects\encoder.o: .\Hardware\mpu6050.h
+.\objects\encoder.o: .\Hardware\MYI2C.h
+.\objects\encoder.o: .\Hardware\oled.h
+.\objects\encoder.o: .\Hardware\PID.h
+.\objects\encoder.o: .\Hardware\encoder.h
+.\objects\encoder.o: .\System\exti.h
+.\objects\encoder.o: .\Hardware\motor.h
+.\objects\encoder.o: .\Hardware\pwm.h
+.\objects\encoder.o: E:\Keil_v5\UV4\ARM\ARMCC\Bin\..\include\string.h
+.\objects\encoder.o: E:\Keil_v5\UV4\ARM\ARMCC\Bin\..\include\stdlib.h
+.\objects\encoder.o: E:\Keil_v5\UV4\ARM\ARMCC\Bin\..\include\math.h

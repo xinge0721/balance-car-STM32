@@ -37,5 +37,13 @@
 .\objects\inv_mpu.o: .\Hardware\mpu6050.h
 .\objects\inv_mpu.o: .\Hardware\MYI2C.h
 .\objects\inv_mpu.o: .\System\sys.h
-.\objects\inv_mpu.o: .\System\Delay.h
+.\objects\inv_mpu.o: .\System\delay.h
+.\objects\inv_mpu.o: .\System\sys.h
 .\objects\inv_mpu.o: .\System\usart.h
+.\objects\inv_mpu.o: .\Hardware\mpu6050.h
+.\objects\inv_mpu.o: .\Hardware\oled.h
+.\objects\inv_mpu.o: .\Hardware\PID.h
+.\objects\inv_mpu.o: .\Hardware\encoder.h
+.\objects\inv_mpu.o: .\System\exti.h
+.\objects\inv_mpu.o: .\Hardware\motor.h
+.\objects\inv_mpu.o: .\Hardware\pwm.h

@@ -1,59 +1,55 @@
-#include "stm32f10x.h"                  // Device header
 #include "motor.h"
-#include "PWM.h"
-#define Ain1 PBout(14)
-#define Ain2 PBout(15)
 
-#define Bin1 PBout(13)
-#define Bin2 PBout(12)
+/*电机初始化函数*/
 
 
-#define Motor_MAX 7200
-#define	Motor_MIN 0
-/**
-  * 函    数：直流电机初始化
-  * 参    数：无
-  * 返 回 值：无
-  */
 void Motor_Init(void)
 {
-	/*开启时钟*/
-	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB, ENABLE);		//开启GPIOA的时钟
+	GPIO_InitTypeDef GPIO_InitStruct;
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB,ENABLE);//开启时钟
 	
-	GPIO_InitTypeDef GPIO_InitStructure;
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
-	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_12 | GPIO_Pin_13 | GPIO_Pin_14 | GPIO_Pin_15;;
-	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-	GPIO_Init(GPIOB, &GPIO_InitStructure);						
-
-	PWM_Init();													//初始化直流电机的底层PWM
+	GPIO_InitStruct.GPIO_Mode=GPIO_Mode_Out_PP;//初始化GPIO--PB12、PB13、PB14、PB15为推挽输出
+	GPIO_InitStruct.GPIO_Pin=GPIO_Pin_12 |GPIO_Pin_13 |GPIO_Pin_14 |GPIO_Pin_15;
+	GPIO_InitStruct.GPIO_Speed=GPIO_Speed_50MHz;
+	GPIO_Init(GPIOB,&GPIO_InitStruct);	
 }
 
-void Motor_section(int* Ain,int* Bin)
+/*限幅函数*/
+void Limit(int *motoA,int *motoB)
 {
-	if(*Ain > Motor_MAX)      *Ain = Motor_MAX;
-	else if(*Ain < Motor_MIN) *Ain = Motor_MIN;
+	if(*motoA>3599)*motoA=3599;
+	if(*motoA<-3599)*motoA=-3599;
 	
-	if(*Bin > Motor_MAX)      *Bin = Motor_MAX;
-	else if(*Bin < Motor_MIN) *Bin = Motor_MIN;
+	if(*motoB>3599)*motoB=3599;
+	if(*motoB<-3599)*motoB=-3599;
 }
 
-int Motor_abs(int moto)
+/*绝对值函数*/
+int GFP_abs(int p)
 {
-	return moto > 0 ? moto: -moto;
+	int q;
+	q=p>0?p:(-p);
+	return q;
 }
 
-void Motor_Speed(int motoA,int motoB)
+/*赋值函数*/
+/*入口参数：PID运算完成后的最终PWM值*/
+void Load(int moto1,int moto2)//moto1=-200：反转200个脉冲
 {
-	if(motoA > 0)     Ain1=1,Ain2=0;
-	else if(motoA < 0)Ain1=0,Ain2=1;
-	else 			  Ain1=0,Ain2=0;
-	TIM_SetCompare1(TIM1,Motor_abs(motoA));
+	//1.研究正负号，对应正反转
+	if(moto1>0)	Ain1=1,Ain2=0;//正转
+	else 				Ain1=0,Ain2=1;//反转
+	//2.研究PWM值
+	TIM_SetCompare1(TIM1,GFP_abs(moto1));
 	
-	if(motoB > 0)	  Bin1=1,Bin2=0;
-	else if(motoB < 0)Bin1=0,Bin2=1;
-	else 			  Bin1=0,Bin2=0;
-	TIM_SetCompare4(TIM1,Motor_abs(motoB));
+	if(moto2>0)	Bin1=1,Bin2=0;
+	else 				Bin1=0,Bin2=1;	
+	TIM_SetCompare4(TIM1,GFP_abs(moto2));
 }
 
-
+char PWM_Zero=0,stop=0;
+//参数：期待角度，测量角度
+void Stop(float *Med_Jiaodu,float *Jiaodu)
+{
+	if(GFP_abs(*Jiaodu-*Med_Jiaodu)>30)Load(PWM_Zero,PWM_Zero);
+}
