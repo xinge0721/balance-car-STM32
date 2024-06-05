@@ -9,7 +9,6 @@ int8_t Speed;		//定义速度变量
 
 int main(void)
 {
-	OLED_Init();
 	while(1)
 	{
 		
